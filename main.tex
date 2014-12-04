@@ -268,7 +268,7 @@ em um acoplamento entre velocidade e pressão desconhecidas.
 Em códigos do tipo "front-tracking" a construção da interface é feita
 através de um conjunto de objetos geométricos, como triângulos,
 segmentos de reta e nós, que são movidos na forma de lagrangian, onde a
-malha de fundo é fixada no espaço. Uma função adicional é necessária
+malha tridimensional é fixada no espaço. Uma função adicional é necessária
 para comunicação entre as malhas, uma vez que não há nenhuma
 interconectividade implícita. esta abordagem mantém a interface entre as
 fases com espessura zero, no qual uma representação precisa é obtida.
@@ -278,56 +278,54 @@ indesejáveis. Como consequência, estas propriedades são suavizados ao
 longo da zona de transição e a espessura nula já não pode ser mais
 garantida.
 
-
-
-
-Unlike front-tracking codes, the present surface and background meshes
-are part of the same computational mesh, thus no additional equation is
-required to pass the information from one mesh to another. The
-3-dimensional mesh comprises a set of tetrahedron elements distributed
-on the domain and the interface is found by a scalar function, namely
-Heaviside, which defines the nodes belonging to each phase and the
-interface itself. To achieve a zero-thickness representation, the
-interface's nodes must be connected consistently so that the piecewise
-discrete interface may be represented by a set of interconnected
-triangles. In other words, each triangle is a face of two adjacent
-tetrahedral elements. Figure~(\ref{fig:inter}a) shows a schematic
-representation of the discrete interface between the two different
-phases. The same triangle face is shared by two adjacent tetrahedrons,
-therefore the zero-thickness interface is successfully achieved.
+Ao contrário de códigos do tipo "front-tracking", a malha da interface
+faz parte da malha tridimensional. Com isso não há necessidade do uso de
+uma equação de transporte adicional ao modelo proposto. A malha
+3-dimensional compreende um conjunto de elementos tetraédricos
+distribuídos sobre o domínio e a interface é encontrado por uma função
+escalar, ou seja, uma função do tipo "Heaviside", que define os nós que
+pertencem a cada uma das fases mais a interface em si. Para obter uma
+representação zero espessura, os nós da interface devem ser ligado de
+forma consistente para que sua discretização possa ser representado por
+um conjunto de triângulos interligado. Em outras palavras, cada
+triângulo é uma face de dois elementos tetraédricos adjacentes. A
+Figura~(\ref{fig:inter}a) mostra um diagrama esquemático    da
+representação da interface entre as duas fases discretas. A mesma face
+do triângulo é compartilhada por dois tetraedros adjacentes,    Por
+conseguinte, a interface de espessura zero é obtida com sucesso.
 
 \begin{figure}[ht!]
 		\subfloat[]{
 		\includegraphics[scale=0.3]{figs/interface.pdf}}
 		\subfloat[]{
 		\includegraphics[scale=0.3]{figs/property.pdf}}
-	\caption{Geometrical representation of the interface between the
-	phases. (a) The interface (gray colored) is represented by a set of
-	triangles, edges and nodes which are part of the tetrahedron mesh.
-	(b) The fluid property $\phi$, such as density or viscosity, is
-	sharply defined in phase $1$ and phase $2$ with a zero thickness
-	interface in the transition zone.}
+	\caption{Representação geométrica da interface entre as fases. (a) A
+	interface (em cinza) é representada por um conjunto de triângulos,
+	segmentos de retas e nós que fazem parte da malha de tetraedros. (b)
+	(b) A propriedade do fluido $\phi$, tal como densidade ou
+	viscosidade, é definida precisamente na fase $1$ e na fase $2$ com 
+	espessura zero na zona de transição das fases.}
 	\label{fig:inter} 
 \end{figure}
 
-Advantages and drawbacks are found in such an approach, but one feature
-is especially interesting due to the definition of the fluid properties
-in the transition area. From the macroscopic point of view, the physical
-meaning of an interface is the region that sharply divides the volume
-occupied by each phase. Thus, it is desirable that such an interface's
-thickness should be kept as thin as possible. The Lagrangian description
-guaranties the geometrical part, but due to the abrupt change in
-properties from one phase to another, numerical instabilities may appear
-and deteriorate the accuracy of the solution. Such a problem is mainly
-due to the location of the interface somewhere in-between two
-computational elements. This can be circumvented with the ALE and the
-Finite Element formulation, in which the interface is not located in
-between mesh elements but it shares the faces of two adjacent
-computational mesh elements and thus the fluid properties remain
-constant in each mesh element. A sharp transition of properties is thus
-successfully achieved and does not require the use of any smoothing
-functions, consequently assuring accuracy in the balance of forces close
-to the interface. 
+Pontos negativos e positivos são encontrados nesta abordagem numérica,
+mas uma característica é especialmente interessante devido à definição
+das propriedades do fluido na área de transição. Do ponto de vista
+macroscópico, o significado físico de uma interface é a região que
+divide acentuadamente o volume ocupada por cada fase. Assim, é desejável
+que uma tal uma espessura de interface deve ser mantida tão fina quanto
+possível. A descrição lagrangiana garante a parte geométrica, mas,
+devido à mudança brusca nas propriedades de uma fase para outra,
+instabilidades numéricas podem aparecer e deteriorar a precisão da
+solução. Tal problema é devido à localização da interface entre dois
+elementos computacionais. Isso pode ser contornado com a formulação ALE
+aliada ao método de Elementos Finitos, em que a interface não fica
+localizada entre elementos de malha mas compartilha as faces de dois
+elementos computacionais adjacentes e, assim, as propriedades do fluido
+permanecem constante em cada elemento de malha. A transição brusca de
+propriedades é, portanto, obtida com sucesso e não requer a utilização
+de qualquer funções de suavização, consequentemente, garantindo precisão
+no equilíbrio de forças próximas à interface.
 
 Figure~(\ref{fig:inter}b) shows the transition zone between the two
 phases colored by dark and light gray, which was purposely drawn to
@@ -357,11 +355,9 @@ fulfilled. In fact, the mechanisms of bubble coalescence and break-up is
 still an open issue and, consequently, a potential field of future
 research. 
 
-As seen earlier in this chapter, the calculation of the surface tension
-force is based on the gradient of a Heaviside function $\nabla H$.
-According to Chapter~(\ref{ch:fem}), a Finite Element formulation for
-the given force is achieved by considering the following scheme:
 
+Uma formulação baseada em elementos finitos pode ser encontrada para a
+força de tensão superficial considerando o seguinte esquema: 
 
 \begin{equation}
 	\frac{1}{We}\mathbf{M} \fvet 
@@ -370,15 +366,15 @@ the given force is achieved by considering the following scheme:
 	\label{eq:surfDiscrete}
 \end{equation}
 
-In the above equation, $\mathbf{\Sigma}$ is a diagonal matrix with
-elements $\sigma \kappa_1, \sigma \kappa_2, \sigma \kappa_3,\cdots,
-\sigma \kappa_{NV}$, where $NV$ is the total number of mesh nodes
-relative to the pressure field. The matrix $\mathbf{G}$ stands for the
-discrete form of the gradient operator $\nabla$ and $H_{\lambda}$ is the
-discrete Heaviside function. Finally, Equation~(\ref{eq:surfDiscrete})
-can be substituted into the discrete momentum equation
-(Eq.~(\ref{eq:ordinarias2})) and the surface tension term calculation
-achieved. 
+Na equação acima, $\mathbf{\Sigma}$ representa uma matriz diagonal com
+elementos $\sigma \kappa_1, \sigma \kappa_2, \sigma \kappa_3,\cdots,
+\sigma \kappa_{NV}$, onde $NV$ é o número total de nós da malha
+relativos ao campo de pressão. A matriz $\mathbf{G}$ representa a forma
+discreta do operador gradiente $\nabla$ e $H_{\lambda}$ é o função
+discreta "Heaviside". Equação~(\ref{eq:surfDiscrete})
+pode ser substuída na forma discreta da equação de conservação de
+quantidade de movimento (Eq.~(\ref{eq:ordinarias2})) e o termo de tensão
+superficial pode então ser calculado. 
 
 \section{Atividades Desenvolvidas pelo Bolsista JVT e Bolsista IC}
 
