@@ -42,7 +42,22 @@
 
 \section{Identificação}
 
-Dados do Bolsista: 
+\noindent Dados do Coordenador: 
+\begin{itemize}
+	\item \textbf{Nome:} Norberto Mangiavacchi
+	\item \textbf{CPF:} 732.841.227-53
+	\item \textbf{Escolaridade:} Doutorado
+	\item \textbf{Endereço Profissional:} Rua Fonseca Teles, 121 --
+	Prédio Anexo, CEP 20940-903 São Cristóvão, RJ - Rio de Janeiro
+	\item \textbf{Telefone Profissional:} +55 21 2332-4733
+	\item \textbf{Endereço Eletrônico:} {\tt norberto@uerj.br}, 
+	                                    {\tt norberto@uerj.br}
+	\item \textbf{Página Profissional:} {\tt http://www.gesar.uerj.br}
+\end{itemize}
+
+\hspace{1cm}
+
+\noindent Dados do Bolsista: 
 \begin{itemize}
 	\item \textbf{Nome:} Gustavo Rabello dos Anjos
 	\item \textbf{CPF:} 042.432.587-08
@@ -55,17 +70,6 @@ Dados do Bolsista:
 	\item \textbf{Página Pessoal:} {\tt http://gustavo.rabello.org}
 \end{itemize}
 
-\noindent Dados do Coordenador: 
-\begin{itemize}
-	\item \textbf{Nome:} Norberto Mangiavacchi
-	\item \textbf{CPF:} 732.841.227-53
-	\item \textbf{Escolaridade:} Doutorado
-	\item \textbf{Endereço Profissional:} Rua Fonseca Teles, 121 --
-	Prédio Anexo, CEP 20940-903 São Cristóvão, RJ - Rio de Janeiro
-	\item \textbf{Telefone Profissional:} +55 21 2332-4733
-	\item \textbf{Endereço Eletrônico:} {\tt norberto@uerj.br}
-	\item \textbf{Página Profissional:} {\tt http://www.gesar.uerj.br}
-\end{itemize}
 \clearpage
 
 \section{Resumo}
@@ -74,7 +78,43 @@ Talentos, os objetivos e metas previstos para o primeiros período foram
 realizados com sucesso. Este documento descreve os resultados obtidos
 pelo pesquisador bolsista Gustavo Rabello dos Anjos no projeto
 entitulado "Sistema de Simulação Numérica de Escoamentos Multifásicos". 
+\clearpage
+
 \section{Introdução}
+Deseja-se abordar o desenvolvimento e o estudo numérico de dois
+problemas atuais como continuidade de projetos de pesquisa e
+desenvolvimento realizados na Universidade do Estado do Rio de
+Janeiro/GESAR: 
+
+\begin{itemize}
+\item Sistema de simulação numérica de produção, estocagem,
+transporte e consumo de metano da decomposição de biomassa em
+reservatórios de hidrelétricas (Edital FAPERJ 09/2013 – Programa de
+apoio às engenharias 2013); 
+\item Simulação numérica de estrutura de
+não-equilíbrio em sistemas químicos, biológico e ambientais (Edital de
+Cooperação Internacional – Chamada Bilateral CNPq 17/2013 – Bélgica).
+\end{itemize}
+
+Ambos com suporte técnico-científico do simulador de escoamentos
+multifásicos escrito em linguagem orientada a objetos (MATLAB/C++)
+utilizando moderna discretização das equações de governo através do
+método de elementos finitos. Para execução do projeto proposto,
+planeja-se concluir o desenvolvimento do simulador para modelos
+tridimensionais e axisimétricos através da incorporação das seguintes
+características: paralelização dos núcleos de cálculo intensivo em
+clusters baseados em processadores de vários núcleos (multicore),
+extensa validação do modelo numérico através de validações analíticas e
+experimentais, este último com colaboração internacional, e publicação
+dos resultados em canais de comunicação internacionais de excelência.
+Com isso, objetiva-se o aperfeiçoamento das técnicas computacionais
+empregadas na instituição de execução do projeto (UERJ/GESAR),
+consolidando o Programa de Pós-graduação em Engenharia Mecânica na UERJ,
+e a formação de recusos humanos, com aperfeiçoamento pessoal de nível
+superior e pós-graduação. Os indicadores de desempenho que serão
+utilizados no projeto estão baseados em publicações produzidas pelo
+bolsista na UERJ, juntamente com o aluno envolvido na bolsa de IC, e
+submetidos a avaliações da comunidade científica.
 
 \section{Objetivos}
 \begin{itemize}
@@ -120,9 +160,9 @@ específica é constante em cada fase, a equação de conservação de massa
 representada em coordenadas cartesianas para 3 dimensões é escrita como:
 
 \begin{equation}
-	\bigg[ \frac{\partial v_x}{\partial x} +
-	       \frac{\partial v_y}{\partial y} +
-	       \frac{\partial v_z}{\partial z} \bigg] 
+	\frac{\partial v_x}{\partial x} +
+	\frac{\partial v_y}{\partial y} +
+	\frac{\partial v_z}{\partial z}  
 	= 
 	0
 	\label{eq:cm9}
@@ -140,15 +180,17 @@ quantidade de movimento linear representada em coordenadas cartesianas é
 dada por:
 
 \begin{equation}
-	\frac{D \vvet}{D t} = -\frac{1}{\rho}\nabla p +
-	\nabla \cdot [\nu(\nabla \vvet + \nabla \vvet^T)]+\textbf{g}
+	\frac{D \vvet}{D t} = - \frac{1}{\rho} \nabla p +
+	\frac{1}{\mu} \nabla \cdot [\nu(\nabla \vvet + \nabla \vvet^T)] + 
+	\textbf{g} + 
+	\textbf{f}
 \label{eq:NS3a}
 \end{equation}
 
-O princípio do transporte de espécie química estabelece que, dado um
+O princípio do transporte de energia estabelece que, dado um
 fluido qualquer com massa específica $\rho$ que escoa através de um
 volume de controle V, a taxa de acumulação da quantidade de energia
-interna da que entra no volume por unidade de tempo é igual ao fluxo
+que entra no volume por unidade de tempo é igual ao fluxo
 líquido de massa para fora do volume, na ausência de termos relacionados
 ao trabalho e a dissipação toma a forma final representada em
 coordeandas cartesianas como:
@@ -164,7 +206,8 @@ coordeandas cartesianas como:
 		=
 		-\frac{1}{\rho} \nabla p + \frac{1}{Re} \nabla \cdot
 		[\nu ( \nabla \vvet + \nabla \vvet^T)]+
-		\frac{1}{Fr^2} \mathbf{g}
+		\frac{1}{Fr^2} \mathbf{g} + 
+		\frac{1}{We} \mathbf{f}
 		\label{eq:final1}
 	\end{equation}
 	\begin{equation}
@@ -172,21 +215,20 @@ coordeandas cartesianas como:
 		\label{eq:final2} 
 	\end{equation}	
 	\begin{equation}
-		\frac{\partial c}{\partial t} + \vvet \cdot \nabla c
+		\frac{\partial T}{\partial t} + \vvet \cdot \nabla T
 		=
-		\frac{1}{ReSc} \nabla \cdot (D \nabla c)
+		\frac{1}{RePr} \nabla \cdot (k \nabla T)
 		\label{eq:final3}
 	\end{equation}\vspace{0.5cm}
 
 Para solução do problema de escoamentos multifásicos, procuramos então
-encontra a solução dos campos de velocidade $\vvet$, pressão $p$ e
+encontrar a solução dos campos de velocidade $\vvet$, pressão $p$ e
 temperatura $T$ enunciados nos três princípios de conservação descritos
 acima. Como a solução analítica destas equações são restritas a
 pouquíssmimos casos práticos, onde muitas simplificações são realizadas,
 utilizamos uma metodologia numérica de aproximação de solução para
 encontramos os valores dos campos $\vvet$, $p$ e $T$ em geometrias
 complexas que são pertinentes ao projeto proposto. 
-
 
 \subsection{Método de Elementos Finitos}
 Nos anos 50, o método de elementos finitos teve grande utilização na
@@ -223,17 +265,21 @@ em um acoplamento entre velocidade e pressão desconhecidas.
 
 \subsection{Discretização do Termo de Tensão Superficial}
 
-In front-tracking codes the interface is constructed by a set of
-geometrical objects, such as triangles, edges and nodes, which are moved
-in Lagrangian fashion, whlie instead the background mesh is fixed on the
-space. An additional function is required to communicate from one mesh to
-another, since there is no implicit interconnectivity. This approach
-leads to the so-called zero-thickness interface, in which a sharp
-representation is achieved. Although its excellent geometrical
-definition, the fluid properties close to the interface require a
-numerical treatment to avoid undesirable instabilities. Thus, these
-properties are smoothed along the transition zone and the zero-thickness
-is no longer guaranteed.
+Em códigos do tipo "front-tracking" a construção da interface é feita
+através de um conjunto de objetos geométricos, como triângulos,
+segmentos de reta e nós, que são movidos na forma de lagrangian, onde a
+malha de fundo é fixada no espaço. Uma função adicional é necessária
+para comunicação entre as malhas, uma vez que não há nenhuma
+interconectividade implícita. esta abordagem mantém a interface entre as
+fases com espessura zero, no qual uma representação precisa é obtida.
+Apesar de sua excelente definição geométrica , as propriedades do fluido
+perto da interface exigem tratamento numérico para evitar instabilidades
+indesejáveis. Como consequência, estas propriedades são suavizados ao
+longo da zona de transição e a espessura nula já não pode ser mais
+garantida.
+
+
+
 
 Unlike front-tracking codes, the present surface and background meshes
 are part of the same computational mesh, thus no additional equation is
