@@ -183,7 +183,7 @@ dada por:
 	\frac{\partial \vvet}{\partial t} + \vvet \cdot \nabla \vvet
 	= 
 	- \frac{1}{\rho} \nabla p +
-	\frac{1}{\mu} \nabla \cdot [\nu(\nabla \vvet + \nabla \vvet^T)] + 
+	\nabla \cdot [\nu(\nabla \vvet + \nabla \vvet^T)] + 
 	\textbf{g} + 
 	\textbf{f}
 \label{eq:NS3a}
@@ -434,6 +434,23 @@ desenvolvimento e pesquisa.
 \end{itemize}
 
 \section{Resultados Obtidos}
+
+Nesta seção buscamos apresentar algumas validações e resultados obtidos
+com o desenvolvimento do código de elementos finitos tridimensionais
+para simulação de escoamentos multifásicos. As
+Figs.~(\ref{fig:pressure3d}, \ref{fig:oscillating} e \ref{fig:sessile})
+representam validações através de comparação com resultados analíticos.
+A Fig.~(\ref{fig:sucrose}) é resultado de simulação de bolha de ar
+imersa em uma solução de sacarose confinada em um canal vertical, movida
+devido a força gravitacional (empuxo). Enquanto que na
+Fig.~(\ref{fig:sucroseVel}) mostra-se o perfil de velocidade do centro
+de massa da bolha em função do tempo para o mesmo caso. Na
+Fig.~(\ref{fig:sin}), mostra-se uma simulação numérica de escoamento
+multifásico de uma bolha de ar imersa em uma solução de glicerol em um
+canal com formato senoidal. Nele é possível notal que a bolha é
+comprimida e alongada devido a passagem em partes mais estreitas do
+canal seguinda de passagens com expansão. Futuras investigações serão
+realizadas no âmbito do presente projeto CAPES.
 
  \begin{figure}[ht!]
  	\begin{center}
