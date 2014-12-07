@@ -353,15 +353,10 @@ visto, a propriedade $\phi_1$ preenche os elementos da fase 1 e a
 propriedade $\phi_2$ preenche exatamente os elementos de fase 2. Mesmo
 para uma razão de propriedade alta $\phi_1 / \phi_2 =$ 1000, a
 metodologia proposta aqui não apresenta oscilações espúrias nos campos
-de pressão e velocidade. Figura~(\ref{fig:density}) descreve uma figura
-unidimensional da distribuição de densidade ao longo das fases.
-Figura~(\ref{fig:density}a) mostra uma distribuição de densidade
-utilizada no método ALE-FE implementada. Devido à formulação de
-elementos finitos, cada propriedade $\phi$ é atribuída en cada elemento
-tetraédrico, assim, uma transição brusca de propriedades é obtida.
-Figura~(\ref{fig:density} b) mostra uma distribuição suavizada
-encontrada tipicamente em métodos do tipo "Level-Set". Este procedimento
-de suavização é necessário para evitar instabilidades numéricas perto da
+de pressão e velocidade. Devido à formulação de elementos finitos, cada
+propriedade $\phi$ é atribuída en cada elemento tetraédrico, assim, uma
+transição brusca de propriedades é obtida. Este procedimento de
+suavização é necessário para evitar instabilidades numéricas perto da
 interface.
 
 Apesar da definição precisa da interface e das transição das
@@ -392,10 +387,9 @@ elementos $\sigma \kappa_1, \sigma \kappa_2, \sigma \kappa_3,\cdots,
 \sigma \kappa_{NV}$, onde $NV$ é o número total de nós da malha
 relativos ao campo de pressão. A matriz $\mathbf{G}$ representa a forma
 discreta do operador gradiente $\nabla$ e $H_{\lambda}$ é o função
-discreta "Heaviside". Equação~(\ref{eq:surfDiscrete})
-pode ser substuída na forma discreta da equação de conservação de
-quantidade de movimento (Eq.~(\ref{eq:ordinarias2})) e o termo de tensão
-superficial pode então ser calculado. 
+discreta "Heaviside". Equação~(\ref{eq:surfDiscrete}) pode ser substuída
+na forma discreta da equação de conservação de quantidade de movimento e
+o termo de tensão superficial pode então ser calculado. 
 
 \section{Atividades Desenvolvidas pelo Bolsista JVT e Bolsista IC}
 
