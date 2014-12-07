@@ -15,6 +15,10 @@
 %\pagestyle{empty}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
+% removing reference name
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\section*{\refname}}{}{}{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MACROS MATEMATICOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\tr}{{\,\rm tr}\,}
 \newcommand{\sen}{{\,\rm sen}\,}
@@ -554,16 +558,6 @@ realizadas no âmbito do presente projeto CAPES.
 	\label{fig:sin} 
  \end{figure}
 
-
-
-
-
-
-
-
-
-
-
 \section{Produção Científica}
 Abaixo estão listados os artigos publicados em canais de comunicação
 internacional em que o pesquisador bolsista teve participação direta.
@@ -629,6 +623,11 @@ simulações pertinentes ao projeto. O pesquisador bolsista participou
 ativamente das publicações relacionadas na seção Produção Científica
 usando as funcionalidades incorporadas ao simulador através deste
 projeto.
+
+\section{Referências Bibliográficas}
+\bibliographystyle{plain}
+\bibliography{$HOME/projects/misc/latex/referencias}
+
 \end{document}	
 
 \typeout{ ****************** End of file main.tex ****************** }

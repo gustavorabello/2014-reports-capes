@@ -9,9 +9,9 @@ all: $(PDFFILE)
 
 $(PDFFILE): main.tex
 	pdflatex $(@:%.dvi=%.tex)
-	#bibtex $(@:%.dvi=%)
-	#pdflatex $(@:%.dvi=%.tex)
-	#pdflatex $(@:%.dvi=%.tex)
+	bibtex $(@:%.dvi=%)
+	pdflatex $(@:%.dvi=%.tex)
+	pdflatex $(@:%.dvi=%.tex)
 
 clean:
 	@rm -vf *.aux *.glo *.gls *.glg *.dvi *.ps *.out *.brf *.ist *.spl
